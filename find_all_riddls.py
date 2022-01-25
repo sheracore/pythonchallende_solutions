@@ -5,15 +5,15 @@ URL = 'http://www.pythonchallenge.com/pc/def/'
 
 def infinite_sequence():
     num = int()
-    if not os.path.exists('test.txt'):
-        with open('test.txt', 'w') as f:
+    if not os.path.exists('index.txt'):
+        with open('index.txt', 'w') as f:
             f.write('1')
 
-    with open('test.txt', 'r') as f:
+    with open('index.txt', 'r') as f:
         #print(f.read(), 'hereee',f.readlines())
         num = f.read()
     num = int(num)
-    with open('test.txt', 'w') as f:
+    with open('index.txt', 'w') as f:
         while True:
             yield num
             num += 1
