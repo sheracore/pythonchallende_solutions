@@ -1,15 +1,20 @@
 import re
-import requests
+import urllib.request
 
-response = requests.get("http://www.pythonchallenge.com/pc/def/equality.html")
-context = response.content # This context is byte type
-context = str(context).replace(r'\n','') # Converting to str type and remove all \n
-#print(context)
 
-#regex patterns
-#result_pattern = re.compile(r"([A-Z])\1\1([a-z])([A-Z])\1\1")
-#result_pattern = re.compile(r"([A-Z])\1([a-z])([A-Z])\1")
-#result_pattern = re.compile(r"([A-Z])\1\1([a-z])")
-result_pattern = re.compile(r"[a-z][A-Z][A-Z][A-Z]([a-z])[A-Z][A-Z][A-Z][a-z]")
-result = result_pattern.findall(context)
-print("".join(result))
+params_pattern = re.compile(r"the next nothing is\s*(\d+)")
+devide_pattern = re.compile(r"Divide by (\w+)\s")
+param = 12345
+counter = 0
+
+while counter < 400:
+    response = urllib.request.urlopen(f"http://www.pythonchallenge.com/pc/def/linkedlist.php/?nothing={param}")
+    result = str(response.read())
+    print(result)
+    devid = devide_pattern.findall(result)
+    if devid:
+        param = param/2
+        continue
+    param = int(params_pattern.findall(result)[0])
+    counter += 1
+    print(counter)

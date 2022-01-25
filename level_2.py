@@ -1,13 +1,17 @@
-str = "g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
+import re
+import requests
 
-for letter in str:
-    ord_ = ord(letter) + 2
-    if  ord_ > ord('z') :
-        ord_ = ord_ - 26
+response = requests.get("http://www.pythonchallenge.com/pc/def/ocr.html")
+context = response.content # This context is byte type
+context = str(context).replace(r'\n','') # Converting to str type and remove all \n
+context = context.replace(r'_','')
 
-    elif  ord_ < ord('a'):
-        ord_ = ord_ - 2
-    print(chr(ord_), end="")
+# regex patterns
+string_pattern = re.compile(r"below:(.*)-->")
+result_pattern = re.compile(r"\w")
 
-print('\n')
+main_string = string_pattern.findall(context)[0]
+result = result_pattern.findall(main_string)
+print(''.join(result))
+
 
