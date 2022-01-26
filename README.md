@@ -1,6 +1,6 @@
 # pythonchallende_solutions
 
-![To see the riddles click on me](http://www.pythonchallenge.com/):
+[To see the riddles click on me](http://www.pythonchallenge.com/):
 
 # Usage
 ## Please install requirements
