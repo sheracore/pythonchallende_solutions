@@ -3,8 +3,8 @@ import random
 
 array_2d = list()
 # Generating 2d_array
-for i in range(4):
-    array_2d.append([random.random() for i in range(2)])
+for _ in range(4):
+    array_2d.append([random.random() for _ in range(2)])
 
 print(array_2d)
 

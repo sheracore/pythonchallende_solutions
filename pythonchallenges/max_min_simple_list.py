@@ -1,6 +1,6 @@
 import random
 
-random_list = [random.random() for i in range(100)]
+random_list = [random.random() for _ in range(100)]
 
 # soulotion 1
 print(max(random_list))
