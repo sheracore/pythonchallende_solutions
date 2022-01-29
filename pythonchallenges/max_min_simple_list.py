@@ -1,6 +1,9 @@
 import random
 
+# Generating random list solution 1
 random_list = [random.random() for _ in range(100)]
+# Generating random list solution 2
+random_list = random.sample(range(0, 100000), 5)
 
 # soulotion 1
 print(max(random_list))
