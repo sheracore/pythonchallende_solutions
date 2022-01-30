@@ -1,35 +1,17 @@
-import string
-import random
-import statistics
+def compare_strings(a, b):
+    """Finding distanse of two string"""
+    if a is None or b is None:
+        raise TypeError('This method required 2 arguments but one/zero passed')
+    if not isinstance(a, str) or not isinstance(b, str):
+        raise TypeError('This method required string arguments!!!')
 
-from collections import Counter
+    # Finding the minimum length
+    min_size = min(len(a), len(b))
+    count = 0
 
-def generate_dict():
-    random_100 = random.randint(0,100)
-    letters = string.ascii_letters
+    for i in range(min_size):
+        if a[i] == b[i]: continue
+        count += 1
 
-    my_dict = dict()
-    for i in range(random_100):
-        random_10 = random.randint(0,10)
-        random_1_10 = random.randint(1,10)
-        key_ = ''.join(random.sample(string.ascii_letters, random_1_10))
-        my_dict[key_] = random_10
+    return count
 
-    return my_dict
-
-my_dict = generate_dict()
-print(my_dict)
-
-print("\n1 :", Counter(my_dict.values()))
-
-max_value =  max(my_dict.values())
-max_ = list(my_dict.keys())[list(my_dict.values()).index(max_value)]
-print("\n2 :", max_)
-
-filter_ = list(filter(lambda x:  3<=len(x)<=5, my_dict.keys()))
-print("\n3 :", filter_)
-
-values_variace = statistics.variance(my_dict.values())
-keys_length_list = list(map(lambda x: len(x), my_dict))
-keys_variance = statistics.variance(keys_length_list)
-print("\n4: values variance :", values_variace, " keys_variance :", keys_variance)
