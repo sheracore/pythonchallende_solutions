@@ -3,7 +3,7 @@ class DoubleSum():
     def __init__(self, initial=0):
         self.initial = initial
 
-    def double_sum(self, list_):
+    def calculate(self, list_):
         print(list_)
         result = list()
         next_ = 0
