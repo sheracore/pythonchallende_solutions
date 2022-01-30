@@ -1,5 +1,6 @@
 import string
 import random
+import statistics
 
 from collections import Counter
 
@@ -23,7 +24,12 @@ print("\n1 :", Counter(my_dict.values()))
 
 max_value =  max(my_dict.values())
 max_ = list(my_dict.keys())[list(my_dict.values()).index(max_value)]
-print("2 :", max_)
+print("\n2 :", max_)
 
 filter_ = list(filter(lambda x:  3<=len(x)<=5, my_dict.keys()))
-print("3 :", filter_)
+print("\n3 :", filter_)
+
+values_variace = statistics.variance(my_dict.values())
+keys_length_list = list(map(lambda x: len(x), my_dict))
+keys_variance = statistics.variance(keys_length_list)
+print("\n4: values variance :", values_variace, " keys_variance :", keys_variance)
