@@ -7,4 +7,4 @@
 ```
 pip install -r requirements.txt
 ```
-### All python challenges are in pythonchallenge directory
+### All python challenges are in pythonchallenge direcrotry
