@@ -12,5 +12,9 @@ class DoubleSum(DoubleCal):
 obj = DoubleSum(initial=100)
 list_ = [1,2,3,4,5]
 
+def add(a,b):
+    return a+b
+
 print(list_)
-print("\n7 : ",obj.calculate(list_, operator.add))
+#print("\n7 : ",obj.calculate(list_, operator.add))
+print("\n7 : ",obj.calculate(list_, add))
