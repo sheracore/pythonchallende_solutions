@@ -25,7 +25,7 @@ pip install -r  requirements.txt
 
 ### “shortest/longest, minimized/maximized, least/most, fewest/greatest, “biggest/smallest
 
-###We know it’s an optimisation problem.
+### We know it’s an optimisation problem.
 ### Dynamic Programming algorithms proof of correctness is usually self-evident. Other algorithmic strategies are often much harder to prove correct. Thus, more error-prone.
 ### When we see these kinds of terms, the problem may ask for a specific number ( “find the minimum number of edit operations”) or it may ask for a result ( “find the longest common subsequence”). The latter type of problem is harder to recognize as a dynamic programming problem. If something sounds like optimisation, Dynamic Programming can solve it.
 
