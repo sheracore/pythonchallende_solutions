@@ -16,6 +16,8 @@ pip install -r  requirements.txt
 ## Dynamic programming vs Recursive difference
 ![Recursive steps](pics/2.jpg)
 
+## The best solution in Dynamming programming is bottom up solution
+
 ## When should I solve this problem with dynamic programming?”
 ### We should use dynamic programming for problems that are between *tractable *and *intractable *problems.
 
