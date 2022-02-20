@@ -11,7 +11,6 @@ class MakeTree():
     def generate_tree_sample(self):
         self.nodes_count = 2**self.depth-1
         values_count = 2**(self.depth+1)
-        print(self.nodes_count)
         values = [random.randint(1,1000) for _ in range(1,values_count)]
         nodes_index_binary_tree = dict()
         
@@ -24,15 +23,18 @@ class MakeTree():
         return nodes_index_binary_tree, values
 
 class MaxPath():
-    dp = [0]*20
+    # dp = [0] * len(self.values)
     
-    # def __init__(self, depth):
-    #     super().__init__(depth)
-    #     print(self.depth, self.values, self.dp)
+    def __init__(self, values, tree):
+        self.tree = tree
+        self.values = values
+        self.dp = [0] * (len(self.values) + 1)
 
     def find_sum_pathes(self, values, tree, child, parent):
-        print(values, tree, child)
-        MaxPath.dp[child] = values[child-1]    
+        # print(MaxPath.dp)
+        # print(values, tree, child)
+        # MaxPath.dp[child] = values[child-1]
+        self.dp[child] = values[child-1] 
         maximum = 0
         
         for child_index in tree[child]:
@@ -40,21 +42,29 @@ class MaxPath():
                 continue
             
             self.find_sum_pathes(values, tree, child_index, child)
-            maximum = max(maximum, MaxPath.dp[child_index])
+            # maximum = max(maximum, MaxPath.dp[child_index])
+            maximum = max(maximum, self.dp[child_index])
         
-        MaxPath.dp[child] += maximum
+        # MaxPath.dp[child] += maximum
+        self.dp[child] += maximum
+        
+    def result(self):
+        self.find_sum_pathes(self.values, self.tree, 1, 0)
+        return self.dp
         
 
 if __name__ == '__main__':
     
-    obj = MakeTree(depth=2)
+    obj = MakeTree(depth=4)
     tree = obj.tree
     values = obj.values
-    print(values)
-    obj = MaxPath()
-    obj.find_sum_pathes(values, tree, 1, 0)
-    print(MaxPath.dp)
-    print('Result is :', max(MaxPath.dp))
+    obj = MaxPath(values, tree)
+    print('values :', values)
+    print('tree :', tree)
+    print('resutl: ',obj.result())
+    # obj.find_sum_pathes(values, tree, 1, 0)
+    # print(MaxPath.dp)
+    print('Result is :', max(obj.result()))
     
 
 
