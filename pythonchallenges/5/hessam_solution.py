@@ -36,7 +36,7 @@ class MaxPath:
 
 
 if __name__ == '__main__':
-    tree_obj = Tree(depth=5)
+    tree_obj = Tree(depth=3)
     tree = tree_obj.generate_tree_sample()
     print(tree)
     
