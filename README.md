@@ -36,3 +36,26 @@ pip install -r  requirements.txt
 
 ## Solve steps of number 5 problem in pychalenge directory
 ![Recursive steps](pics/4.jpg)
+
+# Django
+
+## Create a djang project
+```
+python -m pip install django
+django-admin startproject supersite (Every name you want)
+cd supersite
+.
+├── manage.py
+└── supersite
+    ├── asgi.py
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+python mange.py runserver 8080
+python mange.py runserver 0.0.0.0:8000
+
+
+```
+
