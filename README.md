@@ -59,3 +59,29 @@ python mange.py runserver 0.0.0.0:8000
 
 ```
 
+python manage.py startproject poll
+
+├── db.sqlite3
+├── manage.py
+├── poll
+│   ├── manage.py
+│   └── poll
+│       ├── asgi.py
+│       ├── __init__.py
+│       ├── settings.py
+│       ├── urls.py
+│       └── wsgi.py
+└── supersite
+    ├── asgi.py
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-38.pyc
+    │   ├── settings.cpython-38.pyc
+    │   ├── urls.cpython-38.pyc
+    │   └── wsgi.cpython-38.pyc
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+4 directories, 17 files
+
