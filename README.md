@@ -56,6 +56,8 @@ cd supersite
 python mange.py runserver 8080
 python mange.py runserver 0.0.0.0:8000
 
+python manage.py startapp blabla
+
 
 ```
 
