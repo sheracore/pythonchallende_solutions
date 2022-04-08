@@ -110,3 +110,5 @@ key = pbkdf2(password, salt, iterations-count, hash-function, derived-key-len)
 
 The output data is the derived key of requested length (e.g. 256 bits).
 
+## What is a Salt?
+#### A salt is a random character string that is added to the beginning or the end of a password. This salt is unique to each user, and is stored in the database along with the username and salted-hashed password.
