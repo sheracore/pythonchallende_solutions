@@ -87,3 +87,10 @@ python manage.py startproject poll
 
 4 directories, 17 files
 
+## How django stores passwords
+#### algorithm: pbkdf2_sha256 iterations: 320000 salt: VGZsDV**************** hash: QoVp11**************************************
+#### By default, Django uses the PBKDF2 algorithm with a SHA256 hash, a password stretching mechanism recommended by NIST. This should be sufficient for most users: it’s quite secure, requiring massive amounts of computing time to break.
+```
+<algorithm>$<iterations>$<salt>$<hash>
+```
+### dollar-sign character and consist of: the hashing algorithm, the number of algorithm iterations (work factor), the random salt, and the resulting password hash. 
