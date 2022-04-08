@@ -87,3 +87,28 @@ python manage.py startproject poll
 
 4 directories, 17 files
 
+## How django stores passwords
+#### algorithm: pbkdf2_sha256 iterations: 320000 salt: VGZsDV**************** hash: QoVp11**************************************
+#### By default, Django uses the PBKDF2 algorithm with a SHA256 hash, a password stretching mechanism recommended by NIST. This should be sufficient for most users: it’s quite secure, requiring massive amounts of computing time to break.
+```
+<algorithm>$<iterations>$<salt>$<hash>
+```
+### dollar-sign character and consist of: the hashing algorithm, the number of algorithm iterations (work factor), the random salt, and the resulting password hash.
+
+## PBKDF2
+#### PBKDF2 is a simple cryptographic key derivation function, which is resistant to dictionary attacks and rainbow table attacks. 
+#### It is based on iteratively deriving HMAC many times with some padding.
+### PBKDF2 takes several input parameters and produces the derived key as output:
+```
+key = pbkdf2(password, salt, iterations-count, hash-function, derived-key-len)
+```
+* password – array of bytes / string, e.g. "p@$Sw0rD~3" (8-10 chars minimal length is recommended)
+* salt – securely-generated random bytes, e.g. "df1f2d3f4d77ac66e9c5a6c3d8f921b6" (minimum 64 bits, 128 bits is recommended)
+* iterations-count, e.g. 1024 iterations
+* hash-function for calculating HMAC, e.g. SHA256
+* derived-key-len for the output, e.g. 32 bytes (256 bits)
+
+The output data is the derived key of requested length (e.g. 256 bits).
+
+## What is a Salt?
+#### A salt is a random character string that is added to the beginning or the end of a password. This salt is unique to each user, and is stored in the database along with the username and salted-hashed password.
