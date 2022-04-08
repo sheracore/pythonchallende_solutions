@@ -87,6 +87,7 @@ python manage.py startproject poll
 
 4 directories, 17 files
 
+## Django password
 ### How django stores passwords
 #### algorithm: pbkdf2_sha256 iterations: 320000 salt: VGZsDV**************** hash: QoVp11**************************************
 #### By default, Django uses the PBKDF2 algorithm with a SHA256 hash, a password stretching mechanism recommended by NIST. This should be sufficient for most users: it’s quite secure, requiring massive amounts of computing time to break.
@@ -112,3 +113,14 @@ The output data is the derived key of requested length (e.g. 256 bits).
 
 ### What is a Salt?
 #### A salt is a random character string that is added to the beginning or the end of a password. This salt is unique to each user, and is stored in the database along with the username and salted-hashed password.
+
+## Django settings
+#### By importing the following settings allways we have the django using settings
+```
+from django.conf import settings
+```
+### Static_root and Static_url
+#### Serving static files during development If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.views.static.serve() view. 
+#### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
+#### For example, if your STATIC_URL is defined as static/, you can do this by adding the following snippet to your urls.py:
+
