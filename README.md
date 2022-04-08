@@ -143,4 +143,9 @@ urlpatterns = [
     # ... the rest of your URLconf goes here ...
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
+### To test static_root or medias you cat use this command
+```
+python manage.py collectstatic
+```
+### This will copy all files from your static folders into the STATIC_ROOT directory.
 
