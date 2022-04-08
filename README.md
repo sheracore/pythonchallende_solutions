@@ -123,4 +123,24 @@ from django.conf import settings
 #### Serving static files during development If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.views.static.serve() view. 
 #### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
 #### For example, if your STATIC_URL is defined as static/, you can do this by adding the following snippet to your urls.py:
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
+### Serving files uploaded by a user during development
+#### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
+#### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
+#### For example, if your MEDIA_URL is defined as media/, you can do this by adding the following snippet to your ROOT_URLCONF:
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
 
