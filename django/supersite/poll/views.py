@@ -1,4 +1,10 @@
 from django.http import HttpResponse
+from django.template import loader
+
 
 def poll(request):
-    return HttpResponse("This is beggining")
+    template = loader.get_template('polls/index.html')
+    context = {
+        'template': template
+    }
+    return HttpResponse(template.render(context, request))
