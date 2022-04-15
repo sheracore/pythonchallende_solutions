@@ -87,7 +87,8 @@ python manage.py startproject poll
 
 4 directories, 17 files
 
-## How django stores passwords
+## Django password
+### How django stores passwords
 #### algorithm: pbkdf2_sha256 iterations: 320000 salt: VGZsDV**************** hash: QoVp11**************************************
 #### By default, Django uses the PBKDF2 algorithm with a SHA256 hash, a password stretching mechanism recommended by NIST. This should be sufficient for most users: it’s quite secure, requiring massive amounts of computing time to break.
 ```
@@ -95,7 +96,7 @@ python manage.py startproject poll
 ```
 ### dollar-sign character and consist of: the hashing algorithm, the number of algorithm iterations (work factor), the random salt, and the resulting password hash.
 
-## PBKDF2
+### PBKDF2
 #### PBKDF2 is a simple cryptographic key derivation function, which is resistant to dictionary attacks and rainbow table attacks. 
 #### It is based on iteratively deriving HMAC many times with some padding.
 ### PBKDF2 takes several input parameters and produces the derived key as output:
@@ -110,5 +111,41 @@ key = pbkdf2(password, salt, iterations-count, hash-function, derived-key-len)
 
 The output data is the derived key of requested length (e.g. 256 bits).
 
-## What is a Salt?
+### What is a Salt?
 #### A salt is a random character string that is added to the beginning or the end of a password. This salt is unique to each user, and is stored in the database along with the username and salted-hashed password.
+
+## Django settings
+#### By importing the following settings allways we have the django using settings
+```
+from django.conf import settings
+```
+### Static_root and Static_url
+#### Serving static files during development If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.views.static.serve() view. 
+#### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
+#### For example, if your STATIC_URL is defined as static/, you can do this by adding the following snippet to your urls.py:
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
+### Serving files uploaded by a user during development
+#### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
+#### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
+#### For example, if your MEDIA_URL is defined as media/, you can do this by adding the following snippet to your ROOT_URLCONF:
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+### To test static_root or medias you cat use this command
+```
+python manage.py collectstatic
+```
+### This will copy all files from your static folders into the STATIC_ROOT directory.
+
