@@ -133,6 +133,18 @@ urlpatterns = [
 ```
 ### If you set DEBUGE to False and run /admin your js, css and other static files don't run just be careful that you shuld clean fils and images caches.
 
+### By default, collected files receive permissions from FILE_UPLOAD_PERMISSIONS and collected directories receive permissions from FILE_UPLOAD_DIRECTORY_PERMISSIONS. If you would like different permissions for these files and/or directories, you can subclass either of the static files storage classes and specify the file_permissions_mode and/or directory_permissions_mode parameters, respectively. For example:
+```
+from django.contrib.staticfiles import storage
+
+class MyStaticFilesStorage(storage.StaticFilesStorage):
+    def __init__(self, *args, **kwargs):
+        kwargs['file_permissions_mode'] = 0o640
+        kwargs['directory_permissions_mode'] = 0o760
+        super().__init__(*args, **kwargs)
+```
+### Then set the STATICFILES_STORAGE setting to 'path.to.MyStaticFilesStorage'.
+
 ### Serving files uploaded by a user during development
 #### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
 #### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
