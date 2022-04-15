@@ -144,6 +144,16 @@ class MyStaticFilesStorage(storage.StaticFilesStorage):
         super().__init__(*args, **kwargs)
 ```
 ### Then set the STATICFILES_STORAGE setting to 'path.to.MyStaticFilesStorage'.
+### Use the --nostatic option to disable serving of static files with the staticfiles app entirely. This option is only available if the staticfiles app is in your project’s INSTALLED_APPS setting.
+```
+django-admin runserver --nostatic
+```
+### Use the --insecure option to force serving of static files with the staticfiles app even if the DEBUG setting is False. By using this you acknowledge the fact that it’s grossly inefficient and probably insecure. This is only intended for local development, should never be used in production and is only available if the staticfiles app is in your project’s INSTALLED_APPS setting.
+
+--insecure doesn’t work with ManifestStaticFilesStorage.
+```
+django-admin runserver --insecure
+```
 
 ### Serving files uploaded by a user during development
 #### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
