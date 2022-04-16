@@ -132,6 +132,7 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 ### If you set DEBUGE to False and run /admin your js, css and other static files don't run just be careful that you shuld clean fils and images caches.
+### Be careful that you should create a static dir in your app and in that static dir you should create a dir with that app name
 
 ### By default, collected files receive permissions from FILE_UPLOAD_PERMISSIONS and collected directories receive permissions from FILE_UPLOAD_DIRECTORY_PERMISSIONS. If you would like different permissions for these files and/or directories, you can subclass either of the static files storage classes and specify the file_permissions_mode and/or directory_permissions_mode parameters, respectively. For example:
 ```
