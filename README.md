@@ -155,6 +155,23 @@ django-admin runserver --nostatic
 django-admin runserver --insecure
 ```
 
+## Whitenoise
+```
+STATIC_ROOT = BASE_DIR / "staticfiles"
+python manage.py collectstatic
+Make sure you’re using the static template tag to refer to your static files, rather than writing the URL directly. For example:
+{% load static %}
+<img src="{% static "images/hi.jpg" %}" alt="Hi!" />
+MIDDLEWARE = [
+    # ...
+    "django.middleware.security.SecurityMiddleware",
+--> "whitenoise.middleware.WhiteNoiseMiddleware",
+    # ...
+]
+pip install --upgrade whitenoise
+
+```
+
 ### Serving files uploaded by a user during development
 #### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
 #### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
