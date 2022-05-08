@@ -119,7 +119,7 @@ The output data is the derived key of requested length (e.g. 256 bits).
 ```
 from django.conf import settings
 ```
-### Static_root and Static_url
+## Static
 #### Serving static files during development If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True. If you don’t have django.contrib.staticfiles in INSTALLED_APPS, you can still manually serve static files using the django.views.static.serve() view. 
 #### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
 #### For example, if your STATIC_URL is defined as static/, you can do this by adding the following snippet to your urls.py:
@@ -131,6 +131,48 @@ urlpatterns = [
     # ... the rest of your URLconf goes here ...
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
+### If you set DEBUGE to False and run /admin your js, css and other static files don't run just be careful that you shuld clean fils and images caches.
+### Be careful that you should create a static dir in your app and in that static dir you should create a dir with that app name
+
+### By default, collected files receive permissions from FILE_UPLOAD_PERMISSIONS and collected directories receive permissions from FILE_UPLOAD_DIRECTORY_PERMISSIONS. If you would like different permissions for these files and/or directories, you can subclass either of the static files storage classes and specify the file_permissions_mode and/or directory_permissions_mode parameters, respectively. For example:
+```
+from django.contrib.staticfiles import storage
+
+class MyStaticFilesStorage(storage.StaticFilesStorage):
+    def __init__(self, *args, **kwargs):
+        kwargs['file_permissions_mode'] = 0o640
+        kwargs['directory_permissions_mode'] = 0o760
+        super().__init__(*args, **kwargs)
+```
+### Then set the STATICFILES_STORAGE setting to 'path.to.MyStaticFilesStorage'.
+### Use the --nostatic option to disable serving of static files with the staticfiles app entirely. This option is only available if the staticfiles app is in your project’s INSTALLED_APPS setting.
+```
+django-admin runserver --nostatic
+```
+### Use the --insecure option to force serving of static files with the staticfiles app even if the DEBUG setting is False. By using this you acknowledge the fact that it’s grossly inefficient and probably insecure. This is only intended for local development, should never be used in production and is only available if the staticfiles app is in your project’s INSTALLED_APPS setting.
+
+--insecure doesn’t work with ManifestStaticFilesStorage.
+```
+django-admin runserver --insecure
+```
+
+## Whitenoise
+```
+STATIC_ROOT = BASE_DIR / "staticfiles"
+python manage.py collectstatic
+Make sure you’re using the static template tag to refer to your static files, rather than writing the URL directly. For example:
+{% load static %}
+<img src="{% static "images/hi.jpg" %}" alt="Hi!" />
+MIDDLEWARE = [
+    # ...
+    "django.middleware.security.SecurityMiddleware",
+--> "whitenoise.middleware.WhiteNoiseMiddleware",
+    # ...
+]
+pip install --upgrade whitenoise
+
+```
+
 ### Serving files uploaded by a user during development
 #### During development, you can serve user-uploaded media files from MEDIA_ROOT using the django.views.static.serve() view.
 #### This is not suitable for production use! For some common deployment strategies, see How to deploy static files.
