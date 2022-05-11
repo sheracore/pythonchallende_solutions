@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'whitenoise.runserver_nostatic', #Disable Djangos static file server during DEVELOPMENT
+    # 'rest_captcha',
     'poll',
 ]
 
@@ -83,8 +84,31 @@ CACHES = {
     'session': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'cache_session'
-    }
+    },
+    # 'captcha': {
+    #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+    #     'LOCATION': 'cache_captcha',
+    # },
 }
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'session'
+
+REST_CAPTCHA = {
+    'CAPTCHA_CACHE': 'captcha',
+    'CAPTCHA_TIMEOUT': 300,  # 5 minutes
+    'CAPTCHA_CACHE_KEY': 'rest_captcha_{key}.{version}',
+    'CAPTCHA_LENGTH': 4,
+    'CAPTCHA_FONT_SIZE': 28,
+    'CAPTCHA_IMAGE_SIZE': (135, 60),
+    'CAPTCHA_LETTER_ROTATION': (-35, 35),
+    'CAPTCHA_FOREGROUND_COLOR': '#001100',
+    'CAPTCHA_BACKGROUND_COLOR': '#ffffff',
+    'FILTER_FUNCTION': 'rest_captcha.captcha.filter_default',
+    'NOISE_FUNCTION': 'rest_captcha.captcha.noise_default',
+    # for tests access: MASTER_CAPTCHA: {'secret_key: secret_value'}
+    'MASTER_CAPTCHA': {}
+}
+
 
 WSGI_APPLICATION = 'supersite.wsgi.application'
 
