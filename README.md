@@ -39,7 +39,34 @@ pip install -r  requirements.txt
 
 # Django
 
-# Django_python_concepts
+## How to add translate to django by gettext
+### Every were from you project that you have used gettext, than contents will be translated
+```
+from django.utils.translation import gettext as _
+
+def gettext(TemplateView):
+    return HttpResponse(_('I am wrapped by gettext or i am in gettext method'))
+```
+
+### Create a locale directory in each app, where each language file will reside.
+### This directory can be at your project root level / or inside each app where are translations.
+```
+settings.py
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'),]
+
+>> python manage.py makemessages --locale fa
+```
+### The above command will create django.po(Translation) files in root and your apps so that you most translate it's contents
+```
+#: games/views.py:14
+msgid "I am wrapped by gettext or i am in gettext method"
+msgstr "من توسط gettext محاصره شده ام یا هرجیز دیگه که دوسداشتی"
+```
+### So that run below manage command to translate them
+```
+>> python manage.py compilemessages
+```
+
 
 # Celery
 ## redis
