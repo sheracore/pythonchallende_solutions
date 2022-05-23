@@ -1,6 +1,12 @@
 <!--<img src="./lion.jpg">-->
+{% load i18n %}
+<html>
+<head>
+	{% translate "This is my title" as my_title %}
+	<title>{% block title %}{{my_title}}{% endblock %}</title>
+</head>
 {% load static %}
 <img src="{% static 'poll/lion.jpg' %}" alt="lion!" />
-<!--<p>-->
-<!--{% load static %} "<img src="{% static './lion.jpg' %} alt="home">-->
-<!--</p>-->
+<p>
+{% load static %} "<img src="{% static './lion.jpg' %} alt="home">
+</p>

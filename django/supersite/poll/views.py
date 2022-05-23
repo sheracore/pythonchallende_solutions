@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.views.generic.base import TemplateView
+from django.utils.translation import gettext as _
 
 
 def poll(request):
@@ -8,3 +10,6 @@ def poll(request):
         'template': template
     }
     return HttpResponse(template.render(context, request))
+
+def gettext(TemplateView):
+    return HttpResponse(_('I am wrapped by gettext or i am in gettext method'))
