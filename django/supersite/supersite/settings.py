@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # 'whitenoise.runserver_nostatic', #Disable Djangos static file server during DEVELOPMENT
     # 'rest_captcha',
     'poll',
+    'blog',
 ]
 
 MIDDLEWARE = [
